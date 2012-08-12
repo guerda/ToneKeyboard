@@ -36,11 +36,13 @@ public class Keyboard extends JPanel {
 
   //@formatter:off
   private final String[] letters = new String[] {
+      "1", "2", "3", "4", "5", "6", "7", "8", "9", "0",
       "Q", "W", "E", "R", "T", "Z", "U", "I", "O", "P", 
       "A", "S", "D", "F", "G", "H", "J", "K", "L", "Ö", 
       "Y", "X", "C", "V", "B", "N", "M", ",", ".", "-"};
   
   private final int[] keycodes = new int[] {
+      49,  50,  51,  52,  53,  54,  55,  56,  57,  48, 
       81,  87,  69,  82,  84,  90,  85,  73,  79,  80,
       65,  83,  68,  70,  71,  72,  74,  75,  76,  0,
       89,  88,  67,  86,  66,  78,  77,  44,  46,  45
@@ -66,7 +68,7 @@ public class Keyboard extends JPanel {
     setLayout(tmpMigLayout);
 
     // Initialize all key buttons
-    for (int i = 0; i < 30; i++) {
+    for (int i = 0; i < letters.length; i++) {
       JToggleButton tmpButton = new JToggleButton();
       tmpButton.setText(letters[i]);
       tmpButton.setActionCommand("" + i);

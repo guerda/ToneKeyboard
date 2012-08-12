@@ -3,9 +3,16 @@
  */
 package de.guerda.tonekeyboard;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.List;
+
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+
+import net.miginfocom.swing.MigLayout;
 
 import org.apache.log4j.Logger;
 
@@ -20,6 +27,8 @@ public class ToneKeyboardWindow extends JFrame {
    */
   private static final long serialVersionUID = 1L;
   private Logger logger;
+  private Keyboard keyboard;
+  private SoundController soundController;
 
   /**
    * Creates and returns a logger for this class.
@@ -55,8 +64,35 @@ public class ToneKeyboardWindow extends JFrame {
   }
 
   private void initializeComponents() {
-    Keyboard tmpKeyboard = new Keyboard();
-    add(tmpKeyboard);
+    keyboard = new Keyboard();
+    setLayout(new MigLayout());
+    getContentPane().add(keyboard);
+
+    JButton tmpJButton = new JButton("Play");
+    tmpJButton.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent aEvent) {
+        handlePlayButtonClick(aEvent);
+      }
+    });
+
+    getContentPane().add(tmpJButton);
   }
 
+  private void handlePlayButtonClick(ActionEvent aEvent) {
+    List<Integer> tmpValue = keyboard.getValue();
+    for (Integer tmpInteger : tmpValue) {
+      getSoundController().play(Note.A4, 100);
+    }
+    
+
+  }
+
+  private SoundController getSoundController() {
+    return soundController;
+  }
+
+  public void setSoundController(SoundController aSoundController) {
+    soundController = aSoundController;
+  }
 }
